@@ -126,7 +126,7 @@ export const deleteSach = async (req, res) => {
   }
 };
 
-export const getSachBorrowHistory = async (req, res) => {
+export const getSachBorrowHistory = async (req, res) => { //Lich su muon sach
   try {
     const borrowHistory = await TheoDoiMuonSach.find({ MaSach: req.params.id })
       .populate('MaDocGia', 'HoLot Ten')
@@ -146,7 +146,7 @@ export const getSachBorrowHistory = async (req, res) => {
   }
 };
 
-export const getSachAvailability = async (req, res) => {
+export const getSachAvailability = async (req, res) => { //Kiem tra tinh trang co san cua sach
   try {
     const sach = await Sach.findOne({ MaSach: req.params.id });
     
