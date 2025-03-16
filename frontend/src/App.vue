@@ -12,7 +12,7 @@
         </div>
       </div>
       <div v-else class="flex h-screen">
-        <AdminSidebar :active-menu="currentAdminMenu" />
+        <AppHeader/>
         <div class="flex-1 overflow-auto">
           <div class="">
             <router-view />
@@ -27,10 +27,13 @@
 <script setup>
 import { onMounted } from 'vue';
 import { useAuthStore } from './stores/auth'; 
-// import AdminSidebar from './components/AdminSidebar.vue';
+
+import AppHeader from './components/AppHeader.vue';
 import Login from './views/Login.vue';
 
+
 const authStore = useAuthStore();
+// const currentAdminMenu = ref(''); // Định nghĩa currentAdminMenu
 
 onMounted(async () => {
   if (!authStore.isNhanVienLoaded) {
