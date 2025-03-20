@@ -92,36 +92,49 @@ export const updateNhaXuatBan = async (req, res) => {
 
 export const deleteNhaXuatBan = async (req, res) => {
   try {
-    const sachCount = await Sach.countDocuments({ _id: req.params.id });
-    
-    if (sachCount > 0) {
-      return res.status(400).json({
-        success: false,
-        message: 'Không thể xóa nhà xuất bản đang có sách'
-      });
-    }
-    
-    const nhaXuatBan = await NhaXuatBan.findByIdAndDelete(req.params.id);
-    
+    const { id } = req.params; // Lấy ID từ request
+
+    // Kiểm tra xem nhà xuất bản có tồn tại không
+    const nhaXuatBan = await NhaXuatBan.findById(id);
+
     if (!nhaXuatBan) {
       return res.status(404).json({
         success: false,
-        message: 'Không tìm thấy nhà xuất bản'
+        message: "Không tìm thấy nhà xuất bản.",
       });
     }
-    
+
+    // Chuyển ID thành string để phù hợp với kiểu dữ liệu trong collection Sach
+    const idString = id.toString();
+
+    // Kiểm tra xem có sách nào thuộc nhà xuất bản này không
+    const sachCount = await Sach.countDocuments({ MaNXB: idString });
+
+    if (sachCount > 0) {
+      return res.status(400).json({
+        success: false,
+        message: "Không thể xóa nhà xuất bản vì vẫn còn sách thuộc nhà xuất bản này.",
+      });
+    }
+
+    // Nếu không có sách nào thuộc nhà xuất bản, tiến hành xóa
+    await NhaXuatBan.findByIdAndDelete(id);
+
     res.status(200).json({
       success: true,
-      message: 'Xóa nhà xuất bản thành công'
+      message: "Xóa nhà xuất bản thành công.",
     });
+
   } catch (error) {
     res.status(500).json({
       success: false,
-      message: 'Không thể xóa nhà xuất bản',
-      error: error.message
+      message: "Lỗi máy chủ khi xóa nhà xuất bản.",
+      error: error.message,
     });
   }
 };
+
+
 
 export const getNhaXuatBanBooks = async (req, res) => {
   try {
