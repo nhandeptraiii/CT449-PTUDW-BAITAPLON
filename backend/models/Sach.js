@@ -40,6 +40,6 @@ const sachSchema = new mongoose.Schema({
 });
 
 
-const Sach = mongoose.model('Sach', sachSchema);
+const Sach = mongoose.model('Sach', sachSchema, 'sach');
 
 export default Sach;

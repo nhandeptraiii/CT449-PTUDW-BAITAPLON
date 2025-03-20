@@ -2,14 +2,14 @@ import axios from 'axios';
 
 const API_URL = 'http://localhost:3000/api';
 
+// Tạo instance axios với cấu hình mặc định
 const api = axios.create({
-    baseURL: API_URL,
-    headers: {
-        'Content-Type': 'application/json'
-    }
+  baseURL: API_URL,
+  headers: {
+    'Content-Type': 'application/json',
+  },
 });
 
-// export default apiClient;
 // Thêm interceptor để tự động thêm token vào header
 api.interceptors.request.use(
   (config) => {
@@ -23,22 +23,22 @@ api.interceptors.request.use(
 );
 
 // Auth API
-    export const login = async (credentials) => {
-    try{
-        const response = await api.post('/auth/login', credentials);
-        return response;
-    } catch (error) {
-        console.error('Login error:', error);
-    }
-    return false
-    };
+export const login = async (credentials) => {
+  try{
+    const response = await api.post('/auth/login', credentials);
+    return response;
+  } catch (error) {
+    console.error('Login error:', error);
+  }
+  return false
+};
 
-    export const getMe = async () => {
-    const response = await api.get('/auth/me');
-    return response.data;
-    };
+export const getMe = async () => {
+  const response = await api.get('/auth/me');
+  return response.data;
+};
 
-    // Nhan Vien API
+// Nhan Vien API
 export const createNhanVien = async (nhanVienData) => {
   try {
     const response = await api.post('/nhanvien', nhanVienData);
@@ -74,6 +74,11 @@ export const deleteNhanVien = async (id) => {
   }
 };
 
+export const updateProfile = async (profileData) => {
+  const response = await api.put("/nhanvien/profile", profileData);
+  return response.data;
+};
+
 
 // Sach API
 export const createSach = async (sachData) => {
@@ -86,10 +91,11 @@ export const createSach = async (sachData) => {
   }
 };
 
-export const getAllSach = async () => {
-  const response = await api.get('/sach');
+export const getAllSach = async (params) => {
+  const response = await api.get('/sach', { params });
   return response.data;
 };
+
 
 export const getSachById = async (id) => {
   const response = await api.get(`/sach/${id}`);
@@ -113,11 +119,6 @@ export const deleteSach = async (id) => {
 
 export const getSachBorrowHistory = async (id) => {
   const response = await api.get(`/sach/${id}/borrowings`);
-  return response.data;
-};
-
-export const getSachAvailability = async (id) => {
-  const response = await api.get(`/sach/${id}/availability`);
   return response.data;
 };
 
@@ -226,26 +227,17 @@ export const getMuonSachById = async (id) => {
   return response.data;
 };
 
-export const updateMuonSach = async (muonSachData) => {
-  const response = await api.put(`/muonsach/${id}`, muonSachData);
-  return response.data;
-};
 
-export const returnBook = async () => {
+export const returnBook = async (id) => {
   const response = await api.put(`/muonsach/${id}/return`);
   return response.data;
 };
 
-export const getBorrowingBooks = async () => {
-  const response = await api.get('muonsach/borrowing');
-  return response.data;
-};
-export const getOverdueBooks = async () => {
-  const response = await api.get('muonsach/overdue');
-  return response.data;
-};
-
-export const getBorrowingStatistics = async () => {
-  const response = await api.get('muonsach/statistics');
-  return response.data;
+export const deleteMuonSach = async (id) => {
+  try {
+    const response = await api.delete(`/muonsach/${id}`);
+    return response.data;
+  } catch (error) {    
+    return null;
+  }
 };
