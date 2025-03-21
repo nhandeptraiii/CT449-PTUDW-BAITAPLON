@@ -40,6 +40,6 @@ const docGiaSchema = new mongoose.Schema({
 });
 
 
-const DocGia = mongoose.model('DocGia', docGiaSchema);
+const DocGia = mongoose.model('DocGia', docGiaSchema, 'docgia');
 
 export default DocGia;

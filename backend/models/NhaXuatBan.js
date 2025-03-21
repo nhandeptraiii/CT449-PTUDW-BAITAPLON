@@ -22,6 +22,6 @@ const nhaXuatBanSchema = new mongoose.Schema({
 });
 
 
-const NhaXuatBan = mongoose.model('NhaXuatBan', nhaXuatBanSchema);
+const NhaXuatBan = mongoose.model('NhaXuatBan', nhaXuatBanSchema,'nhaxuatban');
 
 export default NhaXuatBan;
