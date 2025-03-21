@@ -50,6 +50,6 @@ nhanVienSchema.methods.comparePassword = async function(password) {
   return bcrypt.compare(password, this.Password);
 };
 
-const NhanVien = mongoose.model('NhanVien', nhanVienSchema);
+const NhanVien = mongoose.model('NhanVien', nhanVienSchema, 'nhanvien');
 
 export default NhanVien;

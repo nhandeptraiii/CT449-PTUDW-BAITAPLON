@@ -43,13 +43,13 @@
             <td>{{ docGia.DienThoai }}</td>
             <td>{{ docGia.DiaChi }}</td>
             <td>
-              <button class="btn btn-primary btn-sm mr-2" @click="editDocGia(docGia,)" ><i class="fas fa-edit"></i> Chỉnh Sửa</button>
+              <button class="btn btn-primary btn-sm mr-2" @click="editDocGia(docGia)" ><i class="fas fa-edit"></i> Chỉnh Sửa</button>
               <button class="btn btn-danger btn-sm" @click="confirmDelete(docGia._id)"><i class="fas fa-trash"></i> Xóa</button>
             </td>
           </tr>
         </tbody>
       </table>
-      <!-- Modal Thêm Nhà Xuất Bản -->
+      <!-- Modal Thêm Đọc Giả -->
       <div v-if="showAddModal" class="modal fade show" tabindex="-1" style="display: block;">
         <div class="modal-dialog mb-3">
           <div class="modal-content">
@@ -97,7 +97,7 @@
           </div>
         </div>
       </div>
-      <!-- Modal Chỉnh Sửa Nhà Xuất Bản -->
+      <!-- Modal Chỉnh Sửa Đọc Giả -->
       <div v-if="showEditModal" class="modal fade show" tabindex="-1" style="display: block;">
         <div class="modal-dialog mb-3">
           <div class="modal-content">
@@ -139,7 +139,7 @@
                   <label for="diaChi" class="form-label">Địa Chỉ:</label>
                   <input type="text" class="form-control mb-3" id="diaChi" v-model="editDocGiaData.DiaChi" required>
                 </div>
-                <button type="submit" class="btn btn-primary">Chỉnh Sửa Đọc Giả</button>
+                <button type="submit" class="btn btn-primary">Cập Nhật Đọc Giả</button>
               </form>
             </div>
           </div>

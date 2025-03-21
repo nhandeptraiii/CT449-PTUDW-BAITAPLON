@@ -54,15 +54,15 @@
             <div class="modal-body">
               <form @submit.prevent="addNXB">
                 <div class="mb-1">
-                  <label for="tenSach" class="form-label">Mã Nhà Xuất Bản:</label>
+                  <label for="maNXB" class="form-label">Mã Nhà Xuất Bản:</label>
                   <input type="text" class="form-control" id="maNXB" v-model="newNXB.MaNXB" required>
                 </div>
                 <div class="mb-1">
-                  <label for="tenSach" class="form-label">Tên Nhà Xuất Bản:</label>
+                  <label for="tenNXB" class="form-label">Tên Nhà Xuất Bản:</label>
                   <input type="text" class="form-control" id="tenNXB" v-model="newNXB.TenNXB" required>
                 </div>
                 <div class="mb-1">
-                  <label for="tacGia" class="form-label">Địa Chỉ:</label>
+                  <label for="diaChi" class="form-label">Địa Chỉ:</label>
                   <input type="text" class="form-control mb-3" id="diaChi" v-model="newNXB.DiaChi" required>
                 </div>
                 <button type="submit" class="btn btn-primary">Thêm Nhà Xuất Bản</button>

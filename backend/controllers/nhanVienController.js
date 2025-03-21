@@ -66,7 +66,7 @@ export const createNhanVien = async (req, res) => {
 };
 
 export const updateNhanVien = async (req, res) => {
-  req.body.Password = '123456';
+  // req.body.Password = '123456';
   try {
     const nhanVien = await NhanVien.findByIdAndUpdate(
       req.params.id,
