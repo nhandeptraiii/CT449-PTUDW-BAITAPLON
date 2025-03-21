@@ -26,7 +26,7 @@
             Đọc Giả
           </router-link>
         </li>
-        <li class="nav-item">
+        <li v-if="!isLibrarian" class="nav-item">  <!-- Ẩn nếu là "Thu Thu" -->
           <router-link to="/nhanvien" class="nav-link">
             <i class="nc-icon nc-badge"></i>
             Nhân Viên
@@ -57,9 +57,9 @@
 
 <script>
 import { useAuthStore } from '../stores/auth';
+import { computed } from 'vue';
 
 export default {
-  name: 'AppHeader',
   setup() {
     const authStore = useAuthStore();
 
@@ -68,8 +68,11 @@ export default {
       window.location.reload();
     };
 
+    const isLibrarian = computed(() => authStore.isLibrarian); // Kiểm tra nếu là "Thu Thu"
+
     return {
-      logout
+      logout,
+      isLibrarian
     };
   }
 };

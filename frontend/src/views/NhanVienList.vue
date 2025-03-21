@@ -28,7 +28,7 @@
           </tr>
           <tr v-else-if="filteredNhanVien.length === 0">
             <td colspan="8" class="px-6 py-4 text-center text-sm text-gray-500">
-              Không tìm thấy nhân viên nào
+              Bạn không có quyền truy cập
             </td>
           </tr>
           <tr v-for="(nv,index) in filteredNhanVien" :key="nv._id">
@@ -67,7 +67,7 @@
                 <div class="mb-1">
                   <label for="chucVu" class="form-label">Chức Vụ:</label>
                   <select class="form-control" id="chucVu" v-model="newNhanVien.ChucVu" required>
-                    <option value="" disabled>Chọn giới tính</option>
+                    <option value="" disabled>Chọn chức vụ</option>
                     <option value="Quan Tri Vien">Quản Trị Viên</option>
                     <option value="Thu Thu">Thủ Thư</option>
                   </select>
@@ -107,7 +107,7 @@
                 <div class="mb-1">
                   <label for="chucVu" class="form-label">Chức Vụ:</label>
                   <select class="form-control" id="chucVu" v-model="editNhanVienData.ChucVu" required>
-                    <option value="" disabled>Chọn giới tính</option>
+                    <option value="" disabled>Chọn chức vụ</option>
                     <option value="Quan Tri Vien">Quản Trị Viên</option>
                     <option value="Thu Thu">Thủ Thư</option>
                   </select>

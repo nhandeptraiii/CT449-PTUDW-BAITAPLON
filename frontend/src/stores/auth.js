@@ -9,7 +9,6 @@ export const useAuthStore = defineStore('auth', {
   }),
 
   getters: {
-    isEmployee: (state) => state.nhanVien?.ChucVu === "Nhan Vien",
     isLibrarian: (state) => state.nhanVien?.ChucVu === "Thu Thu",
     isAdmin: (state) => state.nhanVien?.ChucVu === "Quan Tri Vien",
   },

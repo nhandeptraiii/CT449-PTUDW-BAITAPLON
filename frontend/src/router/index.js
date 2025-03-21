@@ -45,7 +45,9 @@ const routes = [
       path: '/login',
       name: 'Login',
       component: Login
-    }
+    },
+
+
   ]
 
   const router = createRouter({
@@ -61,22 +63,28 @@ const routes = [
 })
 
 router.beforeEach(async (to, from, next) => {
-  const authStore = useAuthStore()
+  const authStore = useAuthStore();
   if (!authStore.isNhanVienLoaded) {
     try {
-      await authStore.fetchCurrentNhanVien()
+      await authStore.fetchCurrentNhanVien();
     } catch (error) {
-      console.error("Error fetching user:", error)
-      authStore.logout()
+      console.error("Error fetching user:", error);
+      authStore.logout();
     }
   }
-
-  if (to.meta.requiresAuth && !authStore.nhanVien) {
-    next({ name: 'login', query: { redirect: to.fullPath } })
-    return
+  // Chặn "Thu Thư" truy cập trang Nhân Viên
+  if (to.path === "/nhanvien" && authStore.isLibrarian) {
+    next({ path: "/" }); // Chuyển hướng về trang chủ
+    return;
   }
-  next()
-})
+  // Kiểm tra nếu cần đăng nhập
+  if (to.meta.requiresAuth && !authStore.nhanVien) {
+    next({ name: "Login", query: { redirect: to.fullPath } });
+    return;
+  }
+
+  next();
+});
 
 
 export default router
