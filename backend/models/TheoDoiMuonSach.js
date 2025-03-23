@@ -11,6 +11,11 @@ const theoDoiMuonSachSchema = new mongoose.Schema({
     required: true,
     ref: 'Sach'
   },
+  MSNV: {
+    type: mongoose.Schema.Types.ObjectId,
+    required: true,
+    ref: 'NhanVien'
+  },
   NgayMuon: {
     type: Date,
     required: true,
@@ -23,6 +28,8 @@ const theoDoiMuonSachSchema = new mongoose.Schema({
   timestamps: true
 });
 
-const TheoDoiMuonSach = mongoose.model('TheoDoiMuonSach', theoDoiMuonSachSchema);
+theoDoiMuonSachSchema.index({ MaDocGia: 1, MaSach: 1, NgayMuon: 1 }, { unique: true });
+
+const TheoDoiMuonSach = mongoose.model('TheoDoiMuonSach', theoDoiMuonSachSchema,'muonsach');
 
 export default TheoDoiMuonSach;

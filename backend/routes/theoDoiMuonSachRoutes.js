@@ -7,12 +7,14 @@ import {
   returnBook,
   getBorrowingBooks,
   getOverdueBooks,
-  getBorrowingStatistics
+  getBorrowingStatistics,
+  deleteMuonSach
 } from '../controllers/theoDoiMuonSachController.js';
-import { authorizeLibrarian } from '../controllers/authController.js';
+import { authenticate, authorizeLibrarian } from '../controllers/authController.js';
 
 const router = express.Router();
 
+router.use(authenticate);
 router.use(authorizeLibrarian);
 router.get('/', getAllMuonSach);
 router.get('/borrowing', getBorrowingBooks);
@@ -22,5 +24,6 @@ router.get('/:id', getMuonSachById);
 router.post('/', createMuonSach);
 router.put('/:id', updateMuonSach);
 router.put('/:id/return', returnBook);
+router.delete('/:id', deleteMuonSach);
 
 export default router;
