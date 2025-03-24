@@ -12,7 +12,7 @@
         </div>
       </div>
       <div v-else class="flex h-screen">
-        <AppHeader/>
+        <AppHeader v-if="!$route.meta.hideHeader"/>
         <div class="flex-1 overflow-auto">
           <div class="">
             <router-view />

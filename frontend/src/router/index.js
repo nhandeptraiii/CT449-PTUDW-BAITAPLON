@@ -46,7 +46,12 @@ const routes = [
       name: 'Login',
       component: Login
     },
-
+    {
+    path: "/:pathMatch(.*)*",
+    name: "not-found",
+    component: () => import("@/views/NotFound.vue"),
+    meta: { hideHeader: true } // Thêm meta field để ẩn header
+  },
 
   ]
 
