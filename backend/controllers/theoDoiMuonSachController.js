@@ -226,7 +226,7 @@ export const returnBook = async (req, res) => {
 
   } catch (error) {
     console.error("🚨 Lỗi cập nhật:", error);
-    res.status(500).json({ success: false, message: "Lỗi hệ thống", error: error.message });
+    res.status(500).json({ success: false, message: "⚠️ Ngày trả không hợp lệ! Vui lòng nhập đúng định dạng DD-MM-YYYY hoặc DD/MM/YYYY.", error: error.message });
   }
 };
 

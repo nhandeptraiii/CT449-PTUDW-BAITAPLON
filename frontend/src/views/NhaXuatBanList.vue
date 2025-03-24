@@ -65,7 +65,9 @@
                   <label for="diaChi" class="form-label">Địa Chỉ:</label>
                   <input type="text" class="form-control mb-3" id="diaChi" v-model="newNXB.DiaChi" required>
                 </div>
-                <button type="submit" class="btn btn-primary">Thêm Nhà Xuất Bản</button>
+                <div class="text-center mt-2">
+                  <button type="submit" class="btn btn-primary">Thêm Nhà Xuất Bản</button>
+                </div>  
               </form>
             </div>
           </div>
@@ -93,8 +95,10 @@
                 <div class="mb-1">
                   <label for="editDiaChi" class="form-label">Địa Chỉ:</label>
                   <input type="text" class="form-control mb-3" id="editDiaChi" v-model="editNXBData.DiaChi" required>
+                </div>  
+                <div class="text-center mt-2">
+                  <button type="submit" class="btn btn-primary text-center">Cập Nhật Nhà Xuất Bản</button>
                 </div>     
-                <button type="submit" class="btn btn-primary text-center">Cập Nhật Nhà Xuất Bản</button>
               </form>
             </div>
           </div>

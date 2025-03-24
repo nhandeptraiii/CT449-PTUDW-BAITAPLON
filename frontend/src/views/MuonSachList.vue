@@ -81,7 +81,9 @@
                   <label for="ngayMuon" class="form-label">Ngày Mượn:</label>
                   <input type="text" class="form-control" id="ngayMuon" v-model="newMuonSach.NgayMuon" required>
                 </div>
-                <button type="submit" class="btn btn-primary mt-3">Thêm Phiếu Mượn</button>
+                <div class="text-center mt-2">
+                  <button type="submit" class="btn btn-primary mt-3">Thêm Phiếu Mượn</button>
+                </div>
               </form>
             </div>
           </div>
@@ -113,7 +115,9 @@
                   <label for="ngayMuon" class="form-label">Ngày Trả:</label>
                   <input type="text" class="form-control" id="ngayMuon" v-model="editMuonSachData.NgayTra" required >
                 </div>
-                <button type="submit" class="btn btn-primary mt-3">Trả Sách</button>
+                <div class="text-center mt-2">
+                  <button type="submit" class="btn btn-primary mt-3">Trả Sách</button>
+                </div>
               </form>
             </div>
           </div>
@@ -355,7 +359,7 @@ const capnhatMuonSach = async () => {
       showEditModal.value = false;
     } else {
       console.error("Lỗi API khi cập nhật:", response);
-      toast.error("⚠️ Lỗi! Không thể cập nhật phiếu mượn.", {
+      toast.error("⚠️ Ngày trả không hợp lệ! Vui lòng nhập đúng định dạng DD-MM-YYYY hoặc DD/MM/YYYY.", {
         position: "top-right",
         timeout: 3000,
         theme: "colored"

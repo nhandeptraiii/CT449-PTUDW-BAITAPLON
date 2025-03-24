@@ -86,11 +86,13 @@
                     <option v-for="nxb in nhaXuatBanList" :key="nxb._id" :value="nxb._id">{{ nxb.TenNXB }}</option>
                   </select>
                 </div>
-                <div class="mb-3">
+                <div class="mb-1">
                   <label for="namXuatBan" class="form-label">Năm Xuất Bản</label>
                   <input type="number" class="form-control" id="namXuatBan" v-model="newSach.NamXuatBan" required>
                 </div>
-                <button type="submit" class="btn btn-primary">Thêm Sách</button>
+                <div class="text-center mt-2">
+                 <button type="submit" class="btn btn-primary">Thêm Sách</button>
+                </div>
               </form>
             </div>
           </div>
@@ -135,11 +137,13 @@
                     </option>
                   </select>
                 </div>
-                <div class="mb-3">
+                <div class="mb-1">
                   <label for="editNamXuatBan" class="form-label">Năm Xuất Bản:</label>
                   <input type="number" class="form-control" id="editNamXuatBan" v-model="editSachData.NamXuatBan" required>
                 </div>
-                <button type="submit" class="btn btn-primary text-center">Cập Nhật Sách</button>
+                <div class="text-center">
+                  <button type="submit" class="btn btn-primary text-center">Cập Nhật Sách</button>
+                </div>
               </form>
             </div>
           </div>

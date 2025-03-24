@@ -85,13 +85,18 @@
                 </div>
                 <div class="mb-1">
                   <label for="dienThoai" class="form-label">Số Điện Thoại:</label>
-                  <input type="text" class="form-control" id="dienThoai" v-model="newDocGia.DienThoai" required>
+                  <input type="text" class="form-control" id="dienThoai" v-model="newDocGia.DienThoai" @input="validatePhoneNumber(newDocGia.DienThoai, 'new')" required>
+                  <div v-if="phoneError.new" class="text-danger">
+                    Số điện thoại phải có đúng 10 chữ số.
+                  </div>
                 </div>
                 <div class="mb-1">
                   <label for="diaChi" class="form-label">Địa Chỉ:</label>
-                  <input type="text" class="form-control mb-3" id="diaChi" v-model="newDocGia.DiaChi" required>
+                  <input type="text" class="form-control" id="diaChi" v-model="newDocGia.DiaChi" required>
                 </div>
-                <button type="submit" class="btn btn-primary">Thêm Đọc Giả</button>
+                <div class="text-center mt-2">
+                  <button type="submit" class="btn btn-primary">Thêm Đọc Giả</button>
+                </div>  
               </form>
             </div>
           </div>
@@ -133,13 +138,18 @@
                 </div>
                 <div class="mb-1">
                   <label for="dienThoai" class="form-label">Số Điện Thoại:</label>
-                  <input type="text" class="form-control" id="dienThoai" v-model="editDocGiaData.DienThoai" required>
+                  <input type="text" class="form-control" id="dienThoai" v-model="editDocGiaData.DienThoai" @input="validatePhoneNumber(editDocGiaData.DienThoai, 'edit')" required>
+                    <div v-if="phoneError.edit" class="text-danger">
+                      Số điện thoại phải có đúng 10 chữ số.
+                    </div>
                 </div>
                 <div class="mb-1">
                   <label for="diaChi" class="form-label">Địa Chỉ:</label>
-                  <input type="text" class="form-control mb-3" id="diaChi" v-model="editDocGiaData.DiaChi" required>
+                  <input type="text" class="form-control mb-2" id="diaChi" v-model="editDocGiaData.DiaChi" required>
                 </div>
-                <button type="submit" class="btn btn-primary">Cập Nhật Đọc Giả</button>
+                <div class="text-center mt-2">
+                  <button type="submit" class="btn btn-primary">Cập Nhật Đọc Giả</button>
+                </div>  
               </form>
             </div>
           </div>
@@ -156,6 +166,7 @@ import { useAuthStore } from '../stores/auth';
 import { useToast } from 'vue-toastification';
 import InputSearch from '@/components/InputSearch.vue';
 import { format } from "date-fns"; 
+
 
 
 const docGiaList = ref([]);
@@ -186,6 +197,15 @@ const editDocGiaData = reactive({
   DienThoai: '',
   DiaChi: ''
 });
+const phoneError = reactive({
+  new: false, // Lỗi cho modal thêm mới
+  edit: false // Lỗi cho modal chỉnh sửa
+});
+
+const validatePhoneNumber = (phone, type) => {
+  const phoneRegex = /^\d{10}$/; // Chỉ chấp nhận 10 chữ số
+  phoneError[type] = !phoneRegex.test(phone);
+};
 
 const loadDocGia = async () => {
   loading.value = true;
@@ -200,6 +220,15 @@ const loadDocGia = async () => {
   }
 };
 const addDocGia = async () => {
+  validatePhoneNumber(newDocGia.DienThoai, 'new');
+  if (phoneError.new) {
+    toast.error("Số điện thoại không hợp lệ. Vui lòng kiểm tra lại.", {
+      position: "top-right",
+      timeout: 3000,
+      toastClassName: "custom-toast"
+    });
+    return;
+  }
   try {
     if (newDocGia.NgaySinh.includes('-')) {
       const [day, month, year] = newDocGia.NgaySinh.split('-');
@@ -273,6 +302,15 @@ const closeEditModal = () => {
 };
 
 const capnhatDocGia = async () => {
+  validatePhoneNumber(editDocGiaData.DienThoai, 'edit');
+  if (phoneError.edit) {
+    toast.error("Số điện thoại không hợp lệ. Vui lòng kiểm tra lại.", {
+      position: "top-right",
+      timeout: 3000,
+      toastClassName: "custom-toast"
+    });
+    return;
+  }
   try {
     const docGiaData = {
       ...editDocGiaData,

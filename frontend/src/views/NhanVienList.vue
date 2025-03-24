@@ -78,9 +78,19 @@
                 </div>
                 <div class="mb-1">
                   <label for="soDienThoai" class="form-label">Số Điện Thoại:</label>
-                  <input type="text" class="form-control mb-3" id="soDienThoai" v-model="newNhanVien.SoDienThoai" required>
-                </div>             
-                <button type="submit" class="btn btn-primary">Thêm Nhân Viên</button>
+                  <input 
+                  type="text" 
+                  class="form-control mb-3" 
+                  id="soDienThoai" v-model="newNhanVien.SoDienThoai" 
+                  @input="validatePhoneNumber(newNhanVien.SoDienThoai, 'new')" 
+                  required>
+                  <div v-if="phoneError.new" class="text-danger">
+                    Số điện thoại phải có đúng 10 chữ số.
+                  </div>
+                </div>
+                <div class="text-center mt-3">
+                  <button type="submit" class="btn btn-primary">Thêm Nhân Viên</button>
+                </div>                    
               </form>
             </div>
           </div>
@@ -118,9 +128,20 @@
                 </div>
                 <div class="mb-1">
                   <label for="soDienThoai" class="form-label">Số Điện Thoại:</label>
-                  <input type="text" class="form-control mb-3" id="soDienThoai" v-model="editNhanVienData.SoDienThoai" required>
+                  <input 
+                  type="text" 
+                  class="form-control mb-3" 
+                  id="soDienThoai" 
+                  v-model="editNhanVienData.SoDienThoai" 
+                  @input="validatePhoneNumber(editNhanVienData.SoDienThoai, 'edit')" 
+                  required>
+                  <div v-if="phoneError.edit" class="text-danger">
+                    Số điện thoại phải có đúng 10 chữ số.
+                  </div>
                 </div>
-                <button type="submit" class="btn btn-primary">Cập Nhật Nhân Viên</button>
+                <div class="text-center mt-3">
+                  <button type="submit" class="btn btn-primary">Cập Nhật Nhân Viên</button>
+                </div>         
               </form>
             </div>
           </div>
@@ -164,6 +185,15 @@ const editNhanVienData = reactive({
   DiaChi: '',
   SoDienThoai: ''
 });
+const phoneError = reactive({
+  new: false, // Lỗi cho modal thêm mới
+  edit: false // Lỗi cho modal chỉnh sửa
+});
+
+const validatePhoneNumber = (phone, type) => {
+  const phoneRegex = /^\d{10}$/; // Chỉ chấp nhận 10 chữ số
+  phoneError[type] = !phoneRegex.test(phone);
+};
 const loadNhanVien  = async () => {
   loading.value = true;
   try {
@@ -193,6 +223,15 @@ const filteredNhanVien = computed(() => {
 });
 
 const addNhanVien = async () => {
+  validatePhoneNumber(newNhanVien.SoDienThoai, 'new');
+  if (phoneError.new) {
+    toast.error("Số điện thoại không hợp lệ. Vui lòng kiểm tra lại.", {
+      position: "top-right",
+      timeout: 3000,
+      toastClassName: "custom-toast"
+    });
+    return;
+  }
   try {
     const response = await createNhanVien(newNhanVien);
 
@@ -251,6 +290,15 @@ const closeEditModal = () => {
   SoDienThoai = '';
 };
 const capnhatNhanVien = async () => {
+  validatePhoneNumber(newNhanVien.SoDienThoai, 'edit');
+  if (phoneError.edit) {
+    toast.error("Số điện thoại không hợp lệ. Vui lòng kiểm tra lại.", {
+      position: "top-right",
+      timeout: 3000,
+      toastClassName: "custom-toast"
+    });
+    return;
+  }
   try {
     const nhanVienData = {
       ...editNhanVienData,
