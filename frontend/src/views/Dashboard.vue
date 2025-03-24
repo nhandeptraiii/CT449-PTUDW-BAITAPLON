@@ -1,7 +1,7 @@
 <template>
   <div class="card">
     <div class="card-header">
-      <h5>Cập Nhật Thông Tin Nhân Viên</h5>
+      <h5>Thông Tin Nhân Viên</h5>
     </div>
     <div class="card-body">
       <form @submit.prevent="updateProfile">
@@ -61,12 +61,13 @@
         <div v-if="error" class="alert alert-danger">
           {{ error }}
         </div>
-
         <!-- Nút Cập Nhật -->
-        <button type="submit" class="btn btn-primary" :disabled="updateLoading">
-          <span v-if="updateLoading" class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
-          Cập Nhật
-        </button>
+         <div class="text-center mt-2">
+          <button type="submit" class="btn btn-primary" :disabled="updateLoading">
+            <span v-if="updateLoading" class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+            Cập Nhật
+          </button>
+         </div>
       </form>
     </div>
   </div>

@@ -12,6 +12,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "bcrypt": "^5.1.1",
     "bcryptjs": "^3.0.2",
     "cors": "^2.8.5",
     "dotenv": "^16.4.7",
@@ -20,7 +21,8 @@
     "jsonwebtoken": "^9.0.2",
     "mongoose": "^8.10.1",
     "morgan": "^1.10.0",
-    "QuanLyThuVien": "file:"
+    "QuanLyThuVien": "file:",
+    "vue-select": "^3.20.4"
   },
   "devDependencies": {
     "eslint": "^9.22.0",
