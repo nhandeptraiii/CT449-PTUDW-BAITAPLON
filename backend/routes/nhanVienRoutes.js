@@ -5,13 +5,14 @@ import {
   createNhanVien,
   updateNhanVien,
   deleteNhanVien,
-  changePassword
+  updateProfile
 } from '../controllers/nhanVienController.js';
 import { authenticate , authorizeAdmin } from '../controllers/authController.js';
 
 const router = express.Router();
 
 router.use(authenticate);
+router.put('/profile', updateProfile);
 router.use(authorizeAdmin);
 router.get('/', getAllNhanVien);
 router.get('/:id', getNhanVienById);

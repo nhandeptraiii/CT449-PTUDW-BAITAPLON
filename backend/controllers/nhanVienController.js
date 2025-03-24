@@ -200,3 +200,47 @@ export const changePassword = async (req, res) => {
     });
   }
 };
+export const updateProfile = async (req, res) => {
+  try {
+    // Tìm nhân viên theo ID từ request
+    const nhanVien = await NhanVien.findById(req.nhanVien._id);
+    
+    if (!nhanVien) {
+      return res.status(404).json({
+        success: false,
+        message: 'Không tìm thấy nhân viên'
+      });
+    }
+
+    // Cập nhật thông tin nếu có
+    nhanVien.HoTenNV = req.body.HoTen || nhanVien.HoTenNV;
+    nhanVien.DiaChi = req.body.DiaChi || nhanVien.DiaChi;
+    nhanVien.SoDienThoai = req.body.SoDienThoai || nhanVien.SoDienThoai;
+
+    // Nếu có mật khẩu mới, hash trước khi lưu
+    if (req.body.Password) {
+      nhanVien.Password = req.body.Password; // Không hash lại
+    }
+
+    // Lưu nhân viên vào database
+    await nhanVien.save();
+
+    res.status(200).json({
+      success: true,
+      message: 'Cập nhật nhân viên thành công',
+      data: {
+        _id: nhanVien._id,
+        HoTenNV: nhanVien.HoTenNV,
+        DiaChi: nhanVien.DiaChi,
+        SoDienThoai: nhanVien.SoDienThoai,
+      }
+    });
+  } catch (error) {
+    console.error('Lỗi cập nhật nhân viên:', error);
+    res.status(400).json({
+      success: false,
+      message: 'Không thể cập nhật nhân viên',
+      error: error.message
+    });
+  }
+};

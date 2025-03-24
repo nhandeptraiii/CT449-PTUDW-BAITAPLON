@@ -308,7 +308,7 @@ const deleteDocGia = async (id) => {
     const response = await apiDeleteDocGia(id);
     
     if (response?.success) {
-      toast.success("Đã xóa nhà xuất bản thành công", {
+      toast.success("Đã xóa đọc giả thành công", {
         position: "top-right",
         timeout: 3000,
         toastClassName: "custom-toast"
@@ -317,8 +317,8 @@ const deleteDocGia = async (id) => {
       throw new Error(response?.message || "Lỗi không xác định");
     }
   } catch (error) {
-    console.error("Lỗi xóa nhà xuất bản:", error);
-    toast.error(error.response?.data?.message || "Không thể xóa vì có sách thuộc nhà xuất bản đó", {
+    console.error("Lỗi xóa đọc giả:", error);
+    toast.error(error.response?.data?.message || "Không thể đọc giả", {
       position: "top-right",
       timeout: 3000,
       toastClassName: "custom-toast"

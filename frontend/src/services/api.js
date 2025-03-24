@@ -207,15 +207,16 @@ export const getDocGiaBorrowHistory = async (id) => {
 };
 
 // Muon Sach API
-export const createMuonSach = async (muonSachData) => {
+export const createMuonSach = async (data) => {
   try {
-    const response = await api.post('/muonsach', muonSachData);
+    const response = await api.post("/muonsach", data);
     return response.data;
   } catch (error) {
-    console.error('Lỗi tạo phiếu mượn sách:', error);
-    return null;
+    // Ném lỗi để hàm gọi bắt được
+    throw error;
   }
 };
+
 
 export const getAllMuonSach = async () => {
   const response = await api.get('/muonsach');
@@ -228,8 +229,10 @@ export const getMuonSachById = async (id) => {
 };
 
 
-export const returnBook = async (id) => {
-  const response = await api.put(`/muonsach/${id}/return`);
+export const returnBook = async (id, data) => {
+  const response = await api.put(`/muonsach/${id}/return`, data, {
+    headers: { "Content-Type": "application/json" }
+  });
   return response.data;
 };
 
