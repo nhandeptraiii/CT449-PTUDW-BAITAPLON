@@ -82,6 +82,10 @@ router.beforeEach(async (to, from, next) => {
     next({ path: "/" }); // Chuyển hướng về trang chủ
     return;
   }
+  if (to.path === "/nhaxuatban" && authStore.isLibrarian) {
+    next({ path: "/" }); // Chuyển hướng về trang chủ
+    return;
+  }
   // Kiểm tra nếu cần đăng nhập
   if (to.meta.requiresAuth && !authStore.nhanVien) {
     next({ name: "Login", query: { redirect: to.fullPath } });

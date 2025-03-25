@@ -290,7 +290,7 @@ const closeEditModal = () => {
   SoDienThoai = '';
 };
 const capnhatNhanVien = async () => {
-  validatePhoneNumber(newNhanVien.SoDienThoai, 'edit');
+  validatePhoneNumber(editNhanVienData.SoDienThoai, 'edit');
   if (phoneError.edit) {
     toast.error("Số điện thoại không hợp lệ. Vui lòng kiểm tra lại.", {
       position: "top-right",

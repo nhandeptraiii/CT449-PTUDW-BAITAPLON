@@ -395,7 +395,7 @@ const editMuonSach = (muonSach) => {
 };
 
 const confirmDelete = (id) => {
-  if (window.confirm("Bạn có chắc chắn muốn xóa đọc giả này không?")) {
+  if (window.confirm("Bạn có chắc chắn muốn xóa phiếu mượn này không?")) {
     deleteMuonSach(id);
   }
 };

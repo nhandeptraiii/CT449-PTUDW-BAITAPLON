@@ -32,7 +32,7 @@
             Nhân Viên
           </router-link>
         </li>
-        <li class="nav-item">
+        <li v-if="!isLibrarian" class="nav-item">
           <router-link to="/nhaxuatban" class="nav-link">
             <i class="nc-icon nc-bank"></i>
             Nhà Xuất Bản
